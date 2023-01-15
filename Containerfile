@@ -13,4 +13,6 @@ RUN rpm-ostree install distrobox gnome-tweaks podman-compose podman-docker && \
     systemctl enable rpm-ostreed-automatic.timer && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf && \
+    mkdir -p /etc/distrobox && \
+    echo "container_image_default=\"registry.fedoraproject.org/fedora-toolbox:$(rpm -E %fedora)\"" >> /etc/distrobox/distrobox.conf && \
     ostree container commit
