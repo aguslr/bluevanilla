@@ -19,6 +19,7 @@ Features
   + `podman-docker`
 - Adds RPM Fusion repositories and several multimedia packages.
 - Sets automatic checking of updates for the system
+- Reduce *systemd* shutdown timers.
 
 References
 ----------
