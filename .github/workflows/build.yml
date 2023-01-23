@@ -13,6 +13,10 @@ on:
 
 env:
   IMAGE_NAME: ${{ github.event.repository.name }}
+  GITHUB_USERNAME: ${{ github.repository_owner }}
+  GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
   build:
@@ -74,42 +78,33 @@ jobs:
       - name: Push To GitHub Container registry
         uses: redhat-actions/push-to-registry@v2
         id: push-github
-        env:
-          REGISTRY_USER: ${{ github.actor }}
-          REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         with:
           image: ${{ steps.build_image.outputs.image }}
           tags: ${{ steps.build_image.outputs.tags }}
-          registry: ghcr.io/${{ env.REGISTRY_USER }}
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ghcr.io/${{ env.GITHUB_USERNAME }}
+          username: ${{ env.GITHUB_USERNAME }}
+          password: ${{ env.GITHUB_PASSWORD }}
           extra-args: |
             --disable-content-trust
 
       - name: Push To Docker Hub Container registry
         uses: redhat-actions/push-to-registry@v2
         id: push-dockerhub
-        env:
-          REGISTRY_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-          REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         with:
           image: ${{ steps.build_image.outputs.image }}
           tags: ${{ steps.build_image.outputs.tags }}
-          registry: docker.io/${{ env.REGISTRY_USER }}
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: docker.io/${{ env.DOCKER_USERNAME }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
           extra-args: |
             --disable-content-trust
 
       - name: Update Docker Hub description
         uses: peter-evans/dockerhub-description@v3
-        env:
-          REGISTRY_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-          REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         with:
-          repository: ${{ env.REGISTRY_USER }}/${{ env.IMAGE_NAME }}
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
+          repository: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
           short-description: ${{ github.event.repository.description }}
 
       - name: Echo outputs
