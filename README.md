@@ -1,5 +1,5 @@
-SilverBase
-==========
+[SilverBase][1]
+===============
 
 A custom Fedora Silverblue image.
 
@@ -27,12 +27,13 @@ Features
 References
 ----------
 
-- [Building your own custom Fedora Silverblue image][1]
+- [Building your own custom Fedora Silverblue image][2]
 - [ublue-os/base: Base image: Silverblue with unfiltered Flathub, distrobox, and
-  automatic updates][2]
-- [What "filter" was in place for flathub? : Fedora][3]
+  automatic updates][3]
+- [What "filter" was in place for flathub? : Fedora][4]
 
 
-[1]: https://www.ypsidanger.com/building-your-own-fedora-silverblue-image/
-[2]: https://github.com/ublue-os/base
-[3]: https://www.reddit.com/r/Fedora/comments/rv43uv/comment/i6vvm5g/
+[1]: https://github.com/aguslr/silverbase
+[2]: https://www.ypsidanger.com/building-your-own-fedora-silverblue-image/
+[3]: https://github.com/ublue-os/base
+[4]: https://www.reddit.com/r/Fedora/comments/rv43uv/comment/i6vvm5g/
