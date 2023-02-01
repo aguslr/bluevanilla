@@ -23,6 +23,7 @@ Features
 - Replaces filtered Flathub repository with unfiltered one
 - Removes Fedora's Flatpak repository and replaces all its packages with the
   ones from Flathub.
+- Restore GNOME's default background.
 
 References
 ----------
@@ -30,10 +31,12 @@ References
 - [Building your own custom Fedora Silverblue image][2]
 - [ublue-os/base: Base image: Silverblue with unfiltered Flathub, distrobox, and
   automatic updates][3]
-- [What "filter" was in place for flathub? : Fedora][4]
+- [ublue-os/ubuntu: Fedora Silverblue for Ubuntu Expatriates][4]
+- [What "filter" was in place for flathub? : Fedora][5]
 
 
 [1]: https://github.com/aguslr/silverbase
 [2]: https://www.ypsidanger.com/building-your-own-fedora-silverblue-image/
 [3]: https://github.com/ublue-os/base
-[4]: https://www.reddit.com/r/Fedora/comments/rv43uv/comment/i6vvm5g/
+[4]: https://github.com/ublue-os/ubuntu
+[5]: https://www.reddit.com/r/Fedora/comments/rv43uv/comment/i6vvm5g/
