@@ -24,6 +24,10 @@ Features
 - Removes Fedora's Flatpak repository and replaces all its packages with the
   ones from Flathub.
 - Restore GNOME's default background.
+- Add keyboard shortcut to open Terminal into the system's shell:
+  `<Control><Alt>t`.
+- Add keyboard shortcut to open Terminal into the default Distrobox container:
+  `<Super>Return`.
 
 References
 ----------
