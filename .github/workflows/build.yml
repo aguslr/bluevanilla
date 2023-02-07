@@ -67,6 +67,18 @@ jobs:
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=semver,pattern={{version}}
+
+      - name: Extract Docker major version tag
+        if: matrix.major_version != ''
+        id: meta_version
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
+          tags: |
             type=match,pattern=.*,value=${{ matrix.major_version }}
 
       - name: Extract Docker stable tag
@@ -103,6 +115,7 @@ jobs:
             ./Containerfile
           tags: |
             ${{ steps.meta.outputs.tags }}
+            ${{ steps.meta_version.outputs.tags }}
             ${{ steps.meta_stable.outputs.tags }}
             ${{ steps.meta_latest.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
