@@ -31,6 +31,8 @@ jobs:
         major_version: [37]
         include:
           - major_version: 37
+            is_latest: true
+            is_stable: true
 
     steps:
 
@@ -61,12 +63,37 @@ jobs:
             docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
-            latest=auto
+            latest=false
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=semver,pattern={{version}}
             type=match,pattern=.*,value=${{ matrix.major_version }}
-            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Extract Docker stable tag
+        if: matrix.is_stable == true
+        id: meta_stable
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
+          tags: |
+            type=match,pattern=.*,value=stable
+
+      - name: Extract Docker latest tag
+        if: matrix.is_latest == true
+        id: meta_latest
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
+          tags: |
+            type=match,pattern=.*,value=latest
 
       - name: Build Image
         id: build_image
@@ -74,7 +101,10 @@ jobs:
         with:
           containerfiles: |
             ./Containerfile
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            ${{ steps.meta_stable.outputs.tags }}
+            ${{ steps.meta_latest.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             FEDORA_MAJOR_VERSION=${{ matrix.major_version }}
