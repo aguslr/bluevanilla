@@ -53,6 +53,18 @@ jobs:
           username: ${{ env.GITHUB_USERNAME }}
           password: ${{ env.GITHUB_PASSWORD }}
 
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
+          tags: |
+            type=semver,pattern={{version}}
+
       - name: Extract Docker date tag
         if: github.event_name == 'schedule'
         id: meta_date
@@ -112,6 +124,7 @@ jobs:
           containerfiles: |
             ./Containerfile
           tags: |
+            ${{ steps.meta.outputs.tags }}
             ${{ steps.meta_date.outputs.tags }}
             ${{ steps.meta_version.outputs.tags }}
             ${{ steps.meta_stable.outputs.tags }}
