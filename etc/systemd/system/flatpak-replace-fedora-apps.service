@@ -1,5 +1,5 @@
 [Unit]
-Description=Replace Fedora apps with Flathub's
+Description=Replace Fedora apps with Flathub ones
 ConditionPathExists=/var/lib/flatpak/.fedora-initialized
 ConditionPathExists=!/var/lib/flatpak/.flathub-apps-initialized
 After=flatpak-add-flathub-repos.service
