@@ -21,13 +21,12 @@ Features
 - Set automatic checking of updates for the system.
 - Reduce *systemd* shutdown timers.
 - Replace filtered Flathub repository with unfiltered one.
-- Remove Fedora's Flatpak repository and replaces all its packages with the
+- Remove Fedora's Flatpak repository and replace all its packages with the
   ones from Flathub.
 - Restore GNOME's default background.
-- Add keyboard shortcut to open Terminal into the system's shell:
-  `<Control><Alt>t`.
-- Add keyboard shortcut to open Terminal into the default Distrobox container:
-  `<Super>Return`.
+- Add keyboard shortcuts:
+  + Open Terminal into the system's shell: `<Control><Alt>t`
+  + Open Terminal into the default Distrobox container: `<Super>Return`
 
 References
 ----------
