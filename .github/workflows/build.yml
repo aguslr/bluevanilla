@@ -92,7 +92,8 @@ jobs:
             type=schedule,pattern={{date 'YYYYMMDD'}}
 
       - name: Extract Docker major version tag
-        if: matrix.major_version != ''
+        if: |
+          github.event_name != 'pull_request' && matrix.major_version != ''
         id: meta_version
         uses: docker/metadata-action@v4
         with:
@@ -105,7 +106,8 @@ jobs:
             type=match,pattern=.*,value=${{ matrix.major_version }}
 
       - name: Extract Docker stable tag
-        if: matrix.is_stable == true
+        if: |
+          github.event_name != 'pull_request' && matrix.is_stable == true
         id: meta_stable
         uses: docker/metadata-action@v4
         with:
@@ -118,7 +120,8 @@ jobs:
             type=match,pattern=.*,value=stable
 
       - name: Extract Docker latest tag
-        if: matrix.is_latest == true
+        if: |
+          github.event_name != 'pull_request' && matrix.is_latest == true
         id: meta_latest
         uses: docker/metadata-action@v4
         with:
