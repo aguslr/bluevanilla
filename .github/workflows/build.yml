@@ -65,6 +65,19 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
 
+      - name: Extract Docker PR tag
+        if: github.event_name == 'pull_request'
+        id: meta_pr
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
+          tags: |
+            type=ref,event=pr
+
       - name: Extract Docker date tag
         if: github.event_name == 'schedule'
         id: meta_date
@@ -125,6 +138,7 @@ jobs:
             ./Containerfile
           tags: |
             ${{ steps.meta.outputs.tags }}
+            ${{ steps.meta_pr.outputs.tags }}
             ${{ steps.meta_date.outputs.tags }}
             ${{ steps.meta_version.outputs.tags }}
             ${{ steps.meta_stable.outputs.tags }}
