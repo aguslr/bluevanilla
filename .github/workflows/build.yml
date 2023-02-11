@@ -15,8 +15,6 @@ env:
   IMAGE_NAME: ${{ github.event.repository.name }}
   GITHUB_USERNAME: ${{ github.repository_owner }}
   GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
   build:
@@ -39,13 +37,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Log into Docker Hub registry
-        uses: docker/login-action@v2
-        with:
-          registry: docker.io
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-
       - name: Log into GitHub registry
         uses: docker/login-action@v2
         with:
@@ -58,7 +49,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
@@ -71,7 +61,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
@@ -84,7 +73,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
@@ -98,7 +86,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
@@ -112,7 +99,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
@@ -126,7 +112,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            docker.io/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
@@ -158,14 +143,6 @@ jobs:
           tags: ${{ steps.build_image.outputs.tags }}
           extra-args: |
             --disable-content-trust
-
-      - name: Update Docker Hub description
-        uses: peter-evans/dockerhub-description@v3
-        with:
-          repository: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-          short-description: ${{ github.event.repository.description }}
 
       - name: Echo outputs
         run: |
