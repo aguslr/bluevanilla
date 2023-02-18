@@ -1,12 +1,12 @@
-[SilverBase][1]
-===============
+[VanillaBlue][1]
+================
 
 A custom Fedora Silverblue image.
 
 Usage
 -----
 
-    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/silverbase:latest
+    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/vanillablue:latest
 
 Features
 --------
@@ -37,7 +37,7 @@ References
 - [GitHub - ublue-os/ubuntu: Fedora Silverblue for Ubuntu Expatriates][4]
 
 
-[1]: https://github.com/aguslr/silverbase
+[1]: https://github.com/aguslr/vanillablue
 [2]: https://www.ypsidanger.com/building-your-own-fedora-silverblue-image/
 [3]: https://github.com/ublue-os/base
 [4]: https://github.com/ublue-os/ubuntu
