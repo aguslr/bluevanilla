@@ -6,7 +6,7 @@ FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_MAJOR_VERSION}
 COPY etc/dconf/db/local.d/ /etc/dconf/db/local.d/
 COPY etc/systemd/system/ /usr/lib/systemd/system/
 
-RUN rpm-ostree install distrobox gnome-tweaks podman-compose && \
+RUN rpm-ostree install distrobox gnome-tweaks podman-compose podman-docker && \
     rpm-ostree override remove toolbox && \
     rpm-ostree install \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \

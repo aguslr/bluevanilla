@@ -6,7 +6,7 @@ A custom Fedora Silverblue image.
 Usage
 -----
 
-    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/vanillablue:stable
+    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/vanillablue:latest
 
 Features
 --------
