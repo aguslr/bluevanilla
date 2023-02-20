@@ -11,7 +11,7 @@ Usage
 Features
 --------
 
-- Start with a base Fedora Silverblue 37 image
+- Start with a base Fedora Silverblue 37 image.
 - Add the following packages:
   + `distrobox`
   + `gnome-tweaks`
@@ -35,7 +35,7 @@ These images are signed with Sisgstore's [Cosign][5]. You can verify the
 signature by downloading the `cosign.pub` key from this repo and running the
 following command:
 
-    cosign verify --key cosign.pub ghcr.io/aguslr/vanillabue
+    cosign verify --key cosign.pub ghcr.io/aguslr/vanillablue
 
 References
 ----------
