@@ -6,9 +6,17 @@ on:
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'README*'
+      - '*.md'
+      - '*.txt'
   push:
     branches:
       - main
+    paths-ignore:
+      - 'README*'
+      - '*.md'
+      - '*.txt'
   workflow_dispatch:
 
 env:
