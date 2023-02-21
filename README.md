@@ -1,32 +1,24 @@
-[VanillaBlue][1]
+[BlueVanilla][1]
 ================
 
-A custom Fedora Silverblue image.
+A Fedora Silverblue image that uses vanilla GNOME and FlatHub apps.
 
 Usage
 -----
 
-    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/vanillablue:latest
+    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/bluevanilla:latest
 
 Features
 --------
 
-- Start with a base Fedora Silverblue 37 image.
-- Add the following packages:
-  + `distrobox`
-  + `gnome-tweaks`
-  + `podman-compose`
-  + `podman-docker`
-- Add RPM Fusion repositories and several multimedia packages.
-- Set automatic checking of updates for the system.
-- Reduce *systemd* shutdown timers.
+- Start with a base Fedora Silverblue image.
+- Add the `gnome-tweaks` package.
+- Restore GNOME's default background.
 - Replace filtered Flathub repository with unfiltered one.
 - Remove Fedora's Flatpak repository and replace all its packages with the
   ones from Flathub.
-- Restore GNOME's default background.
-- Add keyboard shortcuts:
-  + Open Terminal into the system's shell: `<Control><Alt>t`
-  + Open Terminal into the default Distrobox container: `<Super>Return`
+- Set automatic checking of updates for the system.
+- Reduce *systemd* shutdown timers.
 
 Verification
 ------------
@@ -35,7 +27,7 @@ These images are signed with Sisgstore's [Cosign][5]. You can verify the
 signature by downloading the `cosign.pub` key from this repo and running the
 following command:
 
-    cosign verify --key cosign.pub ghcr.io/aguslr/vanillablue
+    cosign verify --key cosign.pub ghcr.io/aguslr/bluevanilla
 
 References
 ----------
@@ -48,7 +40,7 @@ References
 - [Making your Own - Universal Blue][6]
 
 
-[1]: https://github.com/aguslr/vanillablue
+[1]: https://github.com/aguslr/bluevanilla
 [2]: https://www.ypsidanger.com/building-your-own-fedora-silverblue-image/
 [3]: https://github.com/ublue-os/base
 [4]: https://github.com/ublue-os/ubuntu
