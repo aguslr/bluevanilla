@@ -3,6 +3,8 @@
 
 A Fedora Silverblue image that uses vanilla GNOME and FlatHub apps.
 
+![Screenshot](https://github.com/aguslr/bluevanilla/raw/main/screenshot.png "Screenshot")
+
 Usage
 -----
 
