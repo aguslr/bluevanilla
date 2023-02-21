@@ -76,7 +76,8 @@ jobs:
             type=ref,event=pr
 
       - name: Extract Docker date tag
-        if: github.event_name == 'schedule'
+        if: |
+          github.event_name == 'schedule' && matrix.is_stable == true
         id: meta_date
         uses: docker/metadata-action@v4
         with:
