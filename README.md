@@ -1,7 +1,7 @@
 [BlueVanilla][1]
 ================
 
-[![build-ublue](https://github.com/aguslr/bluevanilla/actions/workflows/build.yml/badge.svg)](https://github.com/aguslr/bluevanilla/actions/workflows/build.yml)
+[![build-image](https://github.com/aguslr/bluevanilla/actions/workflows/build.yml/badge.svg)](https://github.com/aguslr/bluevanilla/actions/workflows/build.yml)
 
 A Fedora Silverblue image that uses vanilla GNOME and FlatHub apps.
 
