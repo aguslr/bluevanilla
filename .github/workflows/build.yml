@@ -67,6 +67,7 @@ jobs:
             latest=false
           tags: |
             type=semver,pattern={{version}}
+            type=sha,prefix=sha256-,format=long
 
       - name: Extract Docker PR tag
         if: github.event_name == 'pull_request'
