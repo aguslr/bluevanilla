@@ -160,7 +160,7 @@ jobs:
             --disable-content-trust
 
       # Sign container
-      - uses: sigstore/cosign-installer@main
+      - uses: sigstore/cosign-installer@v2
 
       # Only needed when running `cosign sign` using a key
       - name: Write signing key to disk
