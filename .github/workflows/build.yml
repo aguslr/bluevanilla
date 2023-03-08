@@ -104,7 +104,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=match,pattern=.*,value=${{ matrix.major_version }}
+            type=raw,value=${{ matrix.major_version }}
 
       - name: Extract Docker stable tag
         if: |
@@ -118,7 +118,7 @@ jobs:
             latest=false
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
-            type=match,pattern=.*,value=stable
+            type=raw,value=stable
 
       - name: Extract Docker latest tag
         if: |
@@ -131,7 +131,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=match,pattern=.*,value=latest
+            type=raw,value=latest
 
       - name: Build Image
         id: build_image
