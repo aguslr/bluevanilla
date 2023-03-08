@@ -82,8 +82,7 @@ jobs:
             type=ref,event=pr
 
       - name: Extract Docker date tag
-        if: |
-          github.event_name == 'schedule' && matrix.is_stable == true
+        if: github.event_name == 'schedule'
         id: meta_date
         uses: docker/metadata-action@v4
         with:
@@ -92,7 +91,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=schedule,pattern=${{ matrix.major_version }}-{{date 'YYYYMMDD'}}
 
       - name: Extract Docker major version tag
         if: |
@@ -118,6 +117,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
+            type=schedule,pattern={{date 'YYYYMMDD'}}
             type=match,pattern=.*,value=stable
 
       - name: Extract Docker latest tag
