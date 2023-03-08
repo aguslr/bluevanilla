@@ -67,7 +67,7 @@ jobs:
             latest=false
           tags: |
             type=semver,pattern={{version}}
-            type=sha
+            type=sha,prefix=sha256-
 
       - name: Extract Docker PR tag
         if: github.event_name == 'pull_request'
@@ -79,7 +79,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=ref,event=pr
+            type=ref,suffix=-${{ matrix.major_version }},event=pr
 
       - name: Extract Docker date tag
         if: github.event_name == 'schedule'
@@ -91,7 +91,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=schedule,pattern=${{ matrix.major_version }}-{{date 'YYYYMMDD'}}
+            type=schedule,prefix=${{ matrix.major_version }}-,pattern={{date 'YYYYMMDD'}}
 
       - name: Extract Docker major version tag
         if: |
