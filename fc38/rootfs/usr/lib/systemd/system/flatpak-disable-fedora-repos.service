@@ -1,5 +1,5 @@
 [Unit]
-Description=Remove Fedora flatpak repositories
+Description=Disable Fedora flatpak repositories
 ConditionPathExists=/var/lib/flatpak/.fedora-initialized
 After=flatpak-replace-fedora-apps.service
 Before=flatpak-system-helper.service
@@ -8,8 +8,8 @@ Before=flatpak-system-helper.service
 Type=oneshot
 RemainAfterExit=yes
 ExecStartPre=/usr/bin/flatpak --system uninstall --noninteractive org.fedoraproject.Platform
-ExecStart=/usr/bin/flatpak --system remote-delete --force fedora
-ExecStart=/usr/bin/flatpak --system remote-delete --force fedora-testing
+ExecStart=/usr/bin/flatpak --system remote-modify --disable fedora
+ExecStart=/usr/bin/flatpak --system remote-modify --disable fedora-testing
 ExecStartPost=/usr/bin/rm -f /var/lib/flatpak/.fedora-initialized
 
 [Install]

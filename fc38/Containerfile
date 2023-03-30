@@ -11,7 +11,7 @@ RUN rpm-ostree install gnome-tweaks && \
     systemctl disable flatpak-add-fedora-repos.service && \
     rm -f /usr/lib/systemd/system/flatpak-add-fedora-repos.service && \
     systemctl enable flatpak-replace-fedora-apps.service && \
-    systemctl enable flatpak-remove-fedora-repos.service && \
+    systemctl enable flatpak-disable-fedora-repos.service && \
     sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=check/' /etc/rpm-ostreed.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
