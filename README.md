@@ -18,7 +18,7 @@ Features
 - Start with a base Fedora Silverblue image.
 - Add the `gnome-tweaks` package.
 - Restore GNOME's default background.
-- Replace filtered Flathub repository with unfiltered one.
+- Remove filter from Flathub repository.
 - Disable Fedora's Flatpak repository and replace all its packages with the ones
   from Flathub.
 - Set automatic checking of updates for the system.
