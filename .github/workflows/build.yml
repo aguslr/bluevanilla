@@ -137,10 +137,8 @@ jobs:
         id: build_image
         uses: redhat-actions/buildah-build@v2
         with:
-          context: |
-            ./fc${{ matrix.major_version }}
           containerfiles: |
-            ./fc${{ matrix.major_version }}/Containerfile
+            ./Containerfile
           tags: |
             ${{ steps.meta.outputs.tags }}
             ${{ steps.meta_pr.outputs.tags }}
