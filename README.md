@@ -19,8 +19,8 @@ Features
 - Add the `gnome-tweaks` package.
 - Restore GNOME's default background.
 - Remove filter from Flathub repository.
-- Disable Fedora's Flatpak repository and replace all its packages with the ones
-  from Flathub.
+- Increase priority of Flathub repositories.
+- Replace Fedora's Flatpaks with the ones from Flathub.
 - Set automatic checking of updates for the system.
 - Reduce *systemd* shutdown timers.
 
