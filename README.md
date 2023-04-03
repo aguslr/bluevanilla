@@ -5,7 +5,11 @@
 
 A Fedora Silverblue image that uses vanilla GNOME and FlatHub apps.
 
-![Screenshot](https://github.com/aguslr/bluevanilla/raw/main/screenshot.png "Screenshot")
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/aguslr/bluevanilla/raw/main/screenshot-light.png">
+  <source media="(prefers-color-scheme: dark)"  srcset="https://github.com/aguslr/bluevanilla/raw/main/screenshot-dark.png">
+  <img title="Screenshot" alt="Screenshot" src="https://github.com/aguslr/bluevanilla/raw/main/screenshot-light.png">
+</picture>
 
 Usage
 -----
