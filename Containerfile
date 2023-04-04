@@ -8,7 +8,7 @@ COPY rootfs/ /
 RUN rpm-ostree install gnome-tweaks && \
     systemctl enable dconf-update.service && \
     rm -rf /usr/share/gnome-shell/extensions/background-logo@fedorahosted.org && \
-    systemctl enable flatpak-modify-flathub-repos.service && \
+    systemctl enable flatpak-add-flathub-repos.service && \
     systemctl enable flatpak-replace-fedora-apps.service && \
     sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=check/' /etc/rpm-ostreed.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \

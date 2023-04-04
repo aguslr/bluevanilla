@@ -22,7 +22,7 @@ Features
 - Start with a base Fedora Silverblue image.
 - Add the `gnome-tweaks` package.
 - Restore GNOME's default background.
-- Remove filter from Flathub repository.
+- Use unfiltered Flathub repositories.
 - Increase priority of Flathub repositories.
 - Replace Fedora's Flatpaks with the ones from Flathub.
 - Set automatic checking of updates for the system.
