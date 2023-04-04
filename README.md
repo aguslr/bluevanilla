@@ -25,6 +25,7 @@ Features
 - Use unfiltered Flathub repository.
 - Increase priority of Flathub repository.
 - Replace Fedora's Flatpaks with the ones from Flathub.
+- Remove unused Flatpak dependencies automatically.
 - Set automatic checking of updates for the system.
 - Reduce *systemd* shutdown timers.
 
