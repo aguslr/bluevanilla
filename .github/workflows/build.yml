@@ -37,12 +37,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        major_version: [37, 38]
+        major_version: [37, 38, 39]
         include:
           - major_version: 37
             is_latest: false
             is_stable: false
           - major_version: 38
+            is_latest: false
+            is_stable: false
+          - major_version: 39
             is_latest: true
             is_stable: true
 
@@ -139,7 +142,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./Containerfile
+            ./Containerfile.${{ matrix.major_version }}
           tags: |
             ${{ steps.meta.outputs.tags }}
             ${{ steps.meta_pr.outputs.tags }}
