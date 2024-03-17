@@ -6,6 +6,7 @@ FROM quay.io/fedora/fedora-silverblue:${FEDORA_MAJOR_VERSION}
 COPY rootfs/ /
 
 RUN rpm-ostree install gnome-tweaks && \
+    sed -i 's/\.ext/.jxl/' /etc/dconf/db/local.d/01-background && \
     systemctl enable dconf-update.service && \
     rm -rf /usr/share/gnome-shell/extensions/background-logo@fedorahosted.org && \
     systemctl enable flatpak-add-flathub-repo.service && \
