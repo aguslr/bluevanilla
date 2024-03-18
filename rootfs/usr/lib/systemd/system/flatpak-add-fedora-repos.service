@@ -1,0 +1,14 @@
+[Unit]
+Description=Add Flathub flatpak repositories
+ConditionPathExists=!/var/lib/flatpak/.fedora-initialized
+Before=flatpak-system-helper.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/flatpak remote-add --system --if-not-exists --title "Flathub" flathub https://flathub.org/repo/flathub.flatpakrepo
+ExecStart=/usr/bin/flatpak remote-add --system --if-not-exists --disable --title "Flathub Beta" flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+ExecStartPost=/usr/bin/touch /var/lib/flatpak/.fedora-initialized
+
+[Install]
+WantedBy=multi-user.target
