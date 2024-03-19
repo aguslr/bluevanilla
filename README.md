@@ -22,6 +22,15 @@ Usage
 
        rpm-ostree rebase ostree-image-signed:docker://ghcr.io/aguslr/bluevanilla:latest && systemctl reboot
 
+Alternatively, an [ISO file for offline installation][7] can be generated with
+the following command:
+
+    sudo podman run --rm --privileged --volume .:/isogenerator/output \
+        --security-opt label=disable --pull=newer \
+        -e IMAGE_REPO="ghcr.iso/aguslr" -e IMAGE_NAME="bluevanilla" \
+        -e IMAGE_TAG="latest" -e VARIANT="Silverblue" \
+        ghcr.io/ublue-os/isogenerator:39
+
 Features
 --------
 
@@ -61,3 +70,4 @@ References
 [4]: https://github.com/ublue-os/ubuntu
 [5]: https://docs.sigstore.dev/cosign/overview/
 [6]: https://ublue.it/making-your-own/
+[7]: https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso
