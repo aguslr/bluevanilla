@@ -14,7 +14,13 @@ A Fedora Silverblue image that uses vanilla GNOME and FlatHub apps.
 Usage
 -----
 
-    sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/aguslr/bluevanilla:latest
+1. Rebase to an unsigned image to get proper signing keys:
+
+       rpm-ostree rebase ostree-unverified-registry:ghcr.io/aguslr/bluevanilla:latest && systemctl reboot
+
+2. Rebase to a signed image to finish the installation:
+
+       rpm-ostree rebase ostree-image-signed:docker://ghcr.io/aguslr/bluevanilla:latest && systemctl reboot
 
 Features
 --------
