@@ -1,8 +1,10 @@
 [Unit]
 Description=Replace Fedora apps with Flathub ones
 ConditionPathExists=/var/lib/flatpak/.fedora-initialized
+ConditionPathExists=/var/lib/flatpak/.flathub-repo-initialized
 ConditionPathExists=!/var/lib/flatpak/.flathub-apps-initialized
 After=flatpak-add-flathub-repo.service
+Wants=network-online.target
 
 [Service]
 Type=oneshot
