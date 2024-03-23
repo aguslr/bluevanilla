@@ -7,9 +7,6 @@ COPY rootfs/ /
 COPY cosign.pub /etc/pki/containers/
 
 RUN sed -i 's/\.ext/.jpg/' /etc/dconf/db/local.d/01-background && \
-    sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=check/' /etc/rpm-ostreed.conf && \
-    sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
-    sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf && \
     rm -rf /usr/share/gnome-shell/extensions/background-logo@fedorahosted.org && \
     systemctl enable dconf-update.service && \
     systemctl enable flatpak-add-flathub-repo.service && \
