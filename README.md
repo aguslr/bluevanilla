@@ -27,7 +27,7 @@ the following command:
 
     sudo podman run --rm --privileged --volume .:/isogenerator/output \
         --security-opt label=disable --pull=newer \
-        -e IMAGE_REPO="ghcr.iso/aguslr" -e IMAGE_NAME="bluevanilla" \
+        -e IMAGE_REPO="ghcr.io/aguslr" -e IMAGE_NAME="bluevanilla" \
         -e IMAGE_TAG="latest" -e VARIANT="Silverblue" \
         ghcr.io/ublue-os/isogenerator:39
 
