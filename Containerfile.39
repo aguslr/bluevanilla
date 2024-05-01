@@ -1,7 +1,6 @@
 ARG FEDORA_MAJOR_VERSION=39
 
 FROM quay.io/fedora/fedora-silverblue:${FEDORA_MAJOR_VERSION}
-# See https://pagure.io/releng/issue/11047 for final location
 
 COPY rootfs/ /
 COPY cosign.pub /etc/pki/containers/
