@@ -5,13 +5,18 @@ FROM quay.io/fedora/fedora-silverblue:${FEDORA_MAJOR_VERSION}
 COPY rootfs/ /
 COPY cosign.pub /etc/pki/containers/
 
-RUN sed -i 's/\.ext/.jxl/' /etc/dconf/db/local.d/01-background && \
-    rm -rf /usr/share/gnome-shell/extensions/background-logo@fedorahosted.org && \
+RUN rpm-ostree override remove \
+    gnome-shell-extension-apps-menu \
+    gnome-shell-extension-launch-new-instance \
+    gnome-shell-extension-places-menu \
+    gnome-shell-extension-window-list \
+    gnome-shell-extension-background-logo ; \
+    sed -i 's/\.ext/.jxl/' /etc/dconf/db/local.d/01-background ; \
     systemctl enable dconf-update.service && \
     systemctl enable flatpak-add-flathub-repo.service && \
     systemctl enable flatpak-replace-fedora-apps.service && \
     systemctl enable flatpak-cleanup.timer && \
-    systemctl enable rpm-ostreed-automatic.timer && \
+    systemctl enable rpm-ostreed-automatic.timer ; \
     rpm-ostree install gnome-tweaks ; \
     rpm-ostree cleanup -m && \
     ostree container commit
