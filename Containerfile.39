@@ -13,12 +13,12 @@ RUN systemctl enable dconf-update.service && \
     sed -i 's/\.ext/.jpg/' /etc/dconf/db/local.d/01-background && \
     rpm-ostree install gnome-tweaks && \
     rpm-ostree override remove \
-    gnome-classic-session \
-    gnome-classic-session-xsession \
-    gnome-shell-extension-apps-menu \
-    gnome-shell-extension-launch-new-instance \
-    gnome-shell-extension-places-menu \
-    gnome-shell-extension-window-list \
-    gnome-shell-extension-background-logo ; \
+        gnome-classic-session \
+        gnome-classic-session-xsession \
+        gnome-shell-extension-apps-menu \
+        gnome-shell-extension-launch-new-instance \
+        gnome-shell-extension-places-menu \
+        gnome-shell-extension-window-list \
+        gnome-shell-extension-background-logo ; \
     rpm-ostree cleanup -m && \
     ostree container commit
