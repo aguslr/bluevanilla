@@ -6,6 +6,8 @@ COPY rootfs/ /
 COPY cosign.pub /etc/pki/containers/
 
 RUN rpm-ostree override remove \
+    gnome-classic-session \
+    gnome-classic-session-xsession \
     gnome-shell-extension-apps-menu \
     gnome-shell-extension-launch-new-instance \
     gnome-shell-extension-places-menu \
