@@ -5,6 +5,53 @@ FROM quay.io/fedora/fedora-silverblue:${FEDORA_MAJOR_VERSION}
 COPY rootfs/ /
 COPY cosign.pub /etc/pki/containers/
 
+# Adding default wallpaper set for GNOME.
+#
+# https://gitlab.gnome.org/GNOME/gnome-backgrounds
+#
+RUN <<-EOT
+	mkdir -p gnome-backgrounds && cd $_
+	
+	# Configure sparse-checkout to only pull the backgrounds directory.
+	#
+	git init .
+	git remote add --no-fetch origin https://gitlab.gnome.org/GNOME/gnome-backgrounds.git --no-tags
+	git config remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
+	git fetch -v --depth=1
+	git config core.sparseCheckout true && echo "backgrounds" >> .git/info/sparse-checkout
+	git pull origin main && cd backgrounds
+
+	# It's not clear whether GNOME intend to stay with the JXL format or revert to previous one(s). For now, 
+	# let's only pull JXL and monitor the situation upstream for a while (preferably until the next cycle or so).
+	# 
+	# https://gitlab.gnome.org/GNOME/gnome-build-meta/-/issues/703
+	# https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/6886
+	# https://gitlab.gnome.org/GNOME/gnome-build-meta/-/issues/698#note_1812452
+	#
+	# NOTE:
+	#
+	# When using the option "-n" or "--no-clobber" with the "mv" command, it
+	# instructs the command not to overwrite existing files. However, it also
+	# unexpectedly returns exit 1. To prevent the script from failing, we need to
+	# disregard this return value.
+	#
+	mv -n **.jxl /usr/share/backgrounds/gnome || true
+
+	# Upstream relies on Meson input preprocessing, but since we don't have Meson
+	# installed, let's replicate its behavior using Bash.
+	#
+	for f in *.xml.in; do mv $f `basename $f .xml.in`.xml; done;
+	for f in *.xml; do sed -i s+@BACKGROUNDDIR@+/usr/share/backgrounds/gnome+g "$f"; done;
+
+	# See NOTE above for "-n" or "--no-clobber" erratic behavior.
+	#
+	mv -n **.xml /usr/share/gnome-background-properties || true
+
+	# Cleanup. Note that we are two subdirectory deep.
+	#
+	cd ../../ && rm -rf gnome-backgrounds
+EOT
+
 RUN <<-EOT bash
 	set -eu
 
