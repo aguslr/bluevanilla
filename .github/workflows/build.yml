@@ -93,7 +93,7 @@ jobs:
           SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
         with:
           file: |
-            ./Containerfile.${{ matrix.major_version }}
+            ./Containerfile
           build-args: |
             FEDORA_MAJOR_VERSION=${{ matrix.major_version }}
           platforms: linux/amd64,linux/arm64
