@@ -5,7 +5,7 @@ FROM quay.io/fedora/fedora-silverblue:${FEDORA_MAJOR_VERSION}
 COPY rootfs/ /
 COPY cosign.pub /etc/pki/containers/
 
-RUN <<-'EOT' bash
+RUN <<-'EOT' sh
 	set -eu
 
 	systemctl enable dconf-update.service
