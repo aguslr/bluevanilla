@@ -2,13 +2,12 @@ ARG FEDORA_MAJOR_VERSION=40
 
 FROM quay.io/fedora/fedora-silverblue:${FEDORA_MAJOR_VERSION}
 
-COPY rootfs/ /
-COPY cosign.pub /etc/pki/containers/
+COPY --chmod=644 rootfs/ /
+COPY --chmod=644 cosign.pub /etc/pki/containers/
 
 RUN <<-'EOT' sh
 	set -eu
 
-	chmod go-w /usr/lib/systemd/system/*.*
 	systemctl enable dconf-update.service
 	systemctl enable flatpak-add-flathub-repo.service
 	systemctl enable flatpak-replace-fedora-apps.service
