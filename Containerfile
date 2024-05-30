@@ -30,7 +30,7 @@ RUN <<-'EOT' sh
 			;;
 	esac
 
-	rpm-ostree install gnome-backgrounds-extras gnome-tweaks
+	rpm-ostree install gcc gnome-backgrounds-extras gnome-tweaks
 	rpm-ostree override remove \
 		gnome-shell-extension-apps-menu \
 		gnome-shell-extension-launch-new-instance \
