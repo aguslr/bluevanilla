@@ -22,6 +22,7 @@ on:
   workflow_dispatch:
 
 env:
+  IMAGE_BASE: quay.io/fedora/fedora-silverblue
   IMAGE_NAME: ${{ github.event.repository.name }}
   REGISTRY_URL: ghcr.io
   REGISTRY_USERNAME: ${{ github.repository_owner }}
@@ -81,12 +82,22 @@ jobs:
             type=schedule,pattern={{date 'YYYYMMDD'}},enable=${{ github.event_name != 'pull_request' && matrix.is_stable == true }}
             type=schedule,prefix=${{ matrix.major_version }}-,pattern={{date 'YYYYMMDD'}},enable=${{ github.event_name == 'schedule' }}
 
+      - name: Check if update available
+        id: check
+        uses: twiddler/is-my-docker-parent-image-out-of-date@v1
+        with:
+          parent-image: ${{ env.IMAGE_BASE }}:${{ matrix.major_version }}
+          my-image: ${{ env.REGISTRY_URL }}/${{ env.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.major_version }}
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push image
         id: build-and-push
+        if:
+          github.event_name != 'schedule' ||
+          steps.check.outputs.out-of-date == 'true'
         uses: docker/build-push-action@v5
         env:
           ACTIONS_RUNTIME_TOKEN: ''
@@ -106,6 +117,7 @@ jobs:
         uses: sigstore/cosign-installer@v3.1.2
 
       - name: Sign container image
+        if: ${{ always() && contains(join(steps.build-and-push.result, ','), 'success') }}
         run: |
           cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ env.REGISTRY_URL }}/${{ env.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}@${TAGS}
         env:
