@@ -6,9 +6,9 @@
 A Fedora Silverblue image that uses vanilla GNOME and FlatHub apps.
 
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="screenshot-light.png">
-  <source media="(prefers-color-scheme: dark)"  srcset="screenshot-dark.png">
-  <img title="Screenshot" alt="Screenshot" src="screenshot-light.png">
+  <source media="(prefers-color-scheme: light)" srcset=".github/screenshot-light.png">
+  <source media="(prefers-color-scheme: dark)"  srcset=".github/screenshot-dark.png">
+  <img title="Screenshot" alt="Screenshot" src=".github/screenshot-light.png">
 </picture>
 
 Usage
