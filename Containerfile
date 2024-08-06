@@ -18,14 +18,14 @@ RUN <<-'EOT' sh
 		sed -i 's|\.ext|.'"${bg_file##*.}"'|' /etc/dconf/db/local.d/01-background
 
 	case "$(rpm -E %fedora)" in
-		39)
-			rpm-ostree override remove \
-				gnome-classic-session
-			;;
 		40)
 			rpm-ostree override remove \
 				gnome-classic-session \
 				gnome-classic-session-xsession
+			;;
+		*)
+			rpm-ostree override remove \
+				gnome-classic-session
 			;;
 	esac
 
