@@ -8,12 +8,6 @@ COPY cosign.pub /etc/pki/containers/
 RUN <<-'EOT' sh
 	set -eu
 
-	systemctl enable dconf-update.service
-	systemctl enable flatpak-add-flathub-repo.service
-	systemctl enable flatpak-replace-fedora-apps.service
-	systemctl enable flatpak-cleanup.timer
-	systemctl enable rpm-ostreed-automatic.timer
-
 	bg_file=$(find /usr/share/backgrounds/gnome/ -name 'adwaita-*.*' -print -quit) && \
 		sed -i 's|\.ext|.'"${bg_file##*.}"'|' /etc/dconf/db/local.d/01-background
 

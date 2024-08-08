@@ -1,0 +1,5 @@
+enable dconf-update.service
+enable flatpak-add-flathub-repo.service
+enable flatpak-replace-fedora-apps.service
+enable flatpak-cleanup.timer
+enable rpm-ostreed-automatic.timer
