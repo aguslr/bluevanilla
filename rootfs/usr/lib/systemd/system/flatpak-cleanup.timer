@@ -5,6 +5,7 @@ Documentation=man:flatpak-uninstall(1)
 [Timer]
 OnBootSec=15m
 OnUnitActiveSec=12h
+Persistent=true
 
 [Install]
 WantedBy=timers.target
